@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  --color-bronze: #ab9274;
+  --color-sand: #e4ddd7;
+  --color-earth: #503d2b;
+  --color-onyx: #0c0c0b;
+  --color-cloud: #f6f1eb;
+  --color-cream: #fbf8f4;
+  --lux-radius: 32px;
+  --lux-shadow: 0 40px 120px rgba(80, 61, 43, 0.22);
+  --lux-blur: saturate(140%) blur(16px);
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-height: 86px;
+}
+
+@theme inline {
+  --color-background: var(--color-sand);
+  --color-foreground: var(--color-earth);
+  --color-bronze: #ab9274;
+  --color-sand: #e4ddd7;
+  --color-earth: #503d2b;
+  --color-cloud: #f6f1eb;
+  --color-cream: #fbf8f4;
+  --color-onyx: #0c0c0b;
+  --font-sans: var(--font-poppins);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-poppins), "Poppins", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: var(--color-sand);
+  color: var(--color-earth);
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+main {
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lux-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1440px;
+  padding-inline: clamp(1.5rem, 4vw, 5rem);
+}
+
+.glass-panel {
+  border-radius: var(--lux-radius);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: var(--lux-blur);
+  border: 1px solid rgba(171, 146, 116, 0.25);
+  box-shadow: var(--lux-shadow);
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
