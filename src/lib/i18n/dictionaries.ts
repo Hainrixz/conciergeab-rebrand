@@ -83,6 +83,17 @@ type ContactContent = {
   emailCta: string;
 };
 
+type FooterContent = {
+  navigationLabel: string;
+  contactLabel: string;
+  callLabel: string;
+  emailLabel: string;
+  locationLabel: string;
+  scheduleCta: string;
+  privacyLinkLabel: string;
+  craftedNote: string;
+};
+
 export type Dictionary = {
   nav: NavLink[];
   hero: HeroContent;
@@ -90,6 +101,7 @@ export type Dictionary = {
   services: ServicesContent;
   portfolio: PortfolioContent;
   contact: ContactContent;
+  footer: FooterContent;
   placeholders: PlaceholderSection[];
 };
 
@@ -102,7 +114,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       { label: "Contact", href: "#contact" },
     ],
     hero: {
-      badge: { location: "Punta de Mita", since: "Since 2008" },
+      badge: { location: "Punta Mita", since: "Since 2007" },
       headline: "Exceptional Property Management in Paradise",
       description:
         "We craft worry-free ownership experiences for Punta de Mita's most celebrated estates, blending meticulous property care with intuitive concierge service for you and your guests.",
@@ -112,9 +124,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
       secondaryCta: "Explore services",
       scrollCta: "Gently scroll",
       stats: [
-        { label: "Private Residences", value: "48", suffix: "+" },
+        { label: "Private Residences", value: "100", suffix: "+" },
         { label: "Guest Satisfaction", value: "98", suffix: "%" },
-        { label: "Years in Punta de Mita", value: "15", suffix: "+" },
+        { label: "Years in Punta Mita", value: "18", suffix: "+" },
       ],
       highlightTitle: "Exclusive enclaves",
       highlights: [
@@ -131,9 +143,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
     about: {
       eyebrow: "About Concierge at the Bay",
       heading: "Concierge at the Bay",
-      summary: "Fifteen years of bespoke property care throughout Punta de Mita.",
+      summary: "Eighteen years of bespoke property care throughout Punta Mita.",
       paragraphs: [
-        "Concierge at the Bay is a property management house with more than 15 years of continuous operation in Punta Mita. We specialize exclusively in luxury residences, deploying a seasoned team to safeguard every detail of your estate and financial stewardship.",
+        "Concierge at the Bay is a property management house with 18 years of continuous operation in Punta Mita. We specialize exclusively in luxury residences, deploying a seasoned team to safeguard every detail of your estate and financial stewardship.",
         "Our headquarters in the Anclote district places us minutes from every enclave in Punta Mita, allowing us to mobilize our in-house staff or trusted partners the moment a need arises.",
         "Decades of white-glove hosting have taught us that unforgettable vacations hinge on anticipation. We curate every touchpoint so owners and guests simply arrive and exhale—our clients' experiences remain our most powerful introduction.",
       ],
@@ -151,12 +163,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
       metrics: [
         {
-          value: "15+",
+          value: "18",
           label: "Years stewarding Punta Mita",
-          detail: "Deep local knowledge since 2008",
+          detail: "Deep local knowledge since 2007",
         },
         {
-          value: "35",
+          value: "150",
           label: "In-house specialists",
           detail: "Concierge, engineering, housekeeping",
         },
@@ -261,6 +273,16 @@ export const dictionaries: Record<Locale, Dictionary> = {
       whatsappCta: "Message us on WhatsApp",
       emailCta: "Email the team",
     },
+    footer: {
+      navigationLabel: "Navigation",
+      contactLabel: "Contact",
+      callLabel: "Call us",
+      emailLabel: "Email",
+      locationLabel: "Our location",
+      scheduleCta: "Schedule with the team",
+      privacyLinkLabel: "Privacy Policy",
+      craftedNote: "Crafted in Punta de Mita",
+    },
     placeholders: [
     ],
   },
@@ -272,7 +294,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       { label: "Contacto", href: "#contact" },
     ],
     hero: {
-      badge: { location: "Punta de Mita", since: "Desde 2008" },
+      badge: { location: "Punta Mita", since: "Desde 2007" },
       headline: "Administración excepcional de propiedades en el paraíso",
       description:
         "Creamos experiencias sin preocupaciones para las residencias más celebradas de Punta de Mita, combinando cuidado meticuloso con un servicio de concierge intuitivo para usted y sus invitados.",
@@ -282,9 +304,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
       secondaryCta: "Explorar servicios",
       scrollCta: "Desliza suavemente",
       stats: [
-        { label: "Residencias privadas", value: "48", suffix: "+" },
+        { label: "Residencias privadas", value: "100", suffix: "+" },
         { label: "Satisfacción de huéspedes", value: "98", suffix: "%" },
-        { label: "Años en Punta de Mita", value: "15", suffix: "+" },
+        { label: "Años en Punta Mita", value: "18", suffix: "+" },
       ],
       highlightTitle: "Enclaves exclusivos",
       highlights: [
@@ -301,9 +323,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
     about: {
       eyebrow: "Sobre Concierge at the Bay",
       heading: "Concierge at the Bay",
-      summary: "Quince años de cuidado personalizado en Punta de Mita.",
+      summary: "Dieciocho años de cuidado personalizado en Punta Mita.",
       paragraphs: [
-        "Concierge at the Bay es una firma de administración con más de 15 años de operación continua en Punta Mita. Nos dedicamos exclusivamente a residencias de lujo, asignando un equipo experimentado que protege cada detalle de la propiedad y la gestión financiera.",
+        "Concierge at the Bay es una firma de administración con 18 años de operación continua en Punta Mita. Nos dedicamos exclusivamente a residencias de lujo, asignando un equipo experimentado que protege cada detalle de la propiedad y la gestión financiera.",
         "Nuestra oficina en la zona de Anclote nos mantiene a minutos de cada enclave de Punta Mita, lo que nos permite movilizar a nuestro personal o socios de confianza en cuanto surge una necesidad.",
         "La hospitalidad a este nivel nos ha enseñado que las vacaciones memorables se anticipan. Curamos cada momento para que propietarios e invitados solo lleguen y respiren; las experiencias de nuestros clientes siguen siendo nuestra mejor carta de presentación.",
       ],
@@ -321,12 +343,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
       metrics: [
         {
-          value: "15+",
+          value: "18",
           label: "Años en Punta Mita",
-          detail: "Conocimiento local desde 2008",
+          detail: "Conocimiento local desde 2007",
         },
         {
-          value: "35",
+          value: "150",
           label: "Especialistas internos",
           detail: "Concierge, ingeniería, housekeeping",
         },
@@ -431,6 +453,16 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Ya sea por un mensaje rápido en WhatsApp o un correo detallado, nuestro equipo en Punta Mita responde de inmediato con los siguientes pasos.",
       whatsappCta: "Escríbenos por WhatsApp",
       emailCta: "Enviar correo",
+    },
+    footer: {
+      navigationLabel: "Navegación",
+      contactLabel: "Contacto",
+      callLabel: "Llámanos",
+      emailLabel: "Correo",
+      locationLabel: "Nuestra ubicación",
+      scheduleCta: "Agenda con el equipo",
+      privacyLinkLabel: "Aviso de Privacidad",
+      craftedNote: "Hecho en Punta de Mita",
     },
     placeholders: [
     ],

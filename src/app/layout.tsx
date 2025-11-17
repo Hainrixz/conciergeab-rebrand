@@ -101,7 +101,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${poppins.variable} bg-sand text-earth antialiased selection:bg-bronze selection:text-white`}
       >

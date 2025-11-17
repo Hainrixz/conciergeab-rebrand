@@ -4,7 +4,7 @@ export const siteCopy = {
   contact: {
     phone: "01-329-291-5470",
     email: "hello@conciergeatthebay.com",
-    whatsapp: "https://wa.me/5213220000000",
+    whatsapp: "https://wa.me/523313440732",
   },
   social: {
     instagram: "https://www.instagram.com/conciergeatthebay",

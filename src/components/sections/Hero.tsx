@@ -32,7 +32,7 @@ export function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative isolate min-h-screen overflow-hidden bg-cream pb-16 pt-[calc(var(--header-height)+3rem)] lg:pb-20"
+      className="relative isolate min-h-screen overflow-hidden bg-cream pb-10 pt-[calc(var(--header-height)+3rem)] md:pb-16 lg:pb-20"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.45),_transparent_60%)]" />
       <div className="lux-container relative grid gap-10 lg:grid-cols-[0.55fr_0.45fr] lg:gap-12">
@@ -120,7 +120,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <div className="relative">
+        <div className="relative mt-10 md:mt-0">
           <motion.div
             style={{ y: imageY }}
             className="relative h-[420px] w-full sm:h-[520px] lg:h-[640px]"
@@ -139,7 +139,7 @@ export function Hero() {
 
             <motion.div
               style={{ y: overlayY }}
-              className="pointer-events-auto absolute left-4 right-4 -top-12 flex flex-col gap-4 rounded-[28px] border border-white/30 bg-white/85 p-5 text-earth shadow-[0_30px_90px_rgba(0,0,0,0.15)] backdrop-blur-xl sm:-top-10 sm:p-6 md:max-w-[320px] md:-left-12 md:right-auto md:top-6 lg:-left-16 lg:top-8"
+              className="pointer-events-auto absolute left-4 right-4 -top-12 hidden gap-4 rounded-[28px] border border-white/30 bg-white/85 p-5 text-earth shadow-[0_30px_90px_rgba(0,0,0,0.15)] backdrop-blur-xl sm:-top-10 sm:p-6 md:-left-12 md:top-6 md:max-w-[320px] md:flex md:flex-col md:right-auto lg:-left-16 lg:top-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
@@ -198,7 +198,7 @@ export function Hero() {
 
       <motion.button
         type="button"
-        className="mx-auto mt-20 flex items-center gap-3 rounded-full border border-earth/20 bg-white/60 px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-earth/70 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:text-sm sm:px-6"
+        className="mx-auto mt-12 flex items-center gap-3 rounded-full border border-earth/20 bg-white/60 px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-earth/70 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:mt-20 sm:text-sm sm:px-6"
         onClick={() => smoothScrollToId("about", 100)}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

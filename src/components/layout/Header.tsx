@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ArrowUpRight, Globe } from "lucide-react";
 import { siteCopy } from "@/lib/data/site";
@@ -15,6 +16,8 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { locale, setLocale, dictionary } = useLocale();
   const navItems = dictionary.nav;
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +32,11 @@ export function Header() {
 
   const handleNavClick = (href: string) => {
     const id = href.replace("#", "");
-    smoothScrollToId(id, 100);
+    if (pathname === "/") {
+      smoothScrollToId(id, 100);
+    } else {
+      router.push(`/${href}`);
+    }
     setIsMenuOpen(false);
   };
 

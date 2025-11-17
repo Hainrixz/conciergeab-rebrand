@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Instagram, Linkedin, ArrowUpRight } from "lucide-react";
 import { useLocale } from "@/components/locale/LocaleProvider";
 import { siteCopy } from "@/lib/data/site";
@@ -22,6 +23,10 @@ const socialLinks = [
 export function Footer() {
   const { dictionary } = useLocale();
   const navItems = dictionary.nav;
+  const footerCopy = dictionary.footer;
+  const router = useRouter();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const digitsOnly = siteCopy.contact.phone.replace(/\D/g, "");
   const telHref =
     digitsOnly.length === 0
@@ -32,7 +37,11 @@ export function Footer() {
 
   const handleNavClick = (href: string) => {
     const id = href.replace("#", "");
-    smoothScrollToId(id, 100);
+    if (isHomePage) {
+      smoothScrollToId(id, 100);
+    } else {
+      router.push(`/${href}`);
+    }
   };
 
   return (
@@ -66,7 +75,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2">
           <div className="space-y-4">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand/50">
-              Navigation
+              {footerCopy.navigationLabel}
             </p>
             <div className="flex flex-col gap-2 text-sm text-sand/70">
               {navItems.map((item) => (
@@ -79,16 +88,22 @@ export function Footer() {
                   {item.label}
                 </button>
               ))}
+              <Link
+                href="/politicas-de-privacidad"
+                className="text-left text-sand/60 transition hover:text-white"
+              >
+                {footerCopy.privacyLinkLabel}
+              </Link>
             </div>
           </div>
 
           <div className="space-y-4">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand/50">
-              Contact
+              {footerCopy.contactLabel}
             </p>
             <div className="text-sm text-sand/80">
               <p className="mb-2 font-semibold uppercase tracking-[0.35em] text-sand/60">
-                Call us
+                {footerCopy.callLabel}
               </p>
               <a
                 href={`tel:${telHref}`}
@@ -97,7 +112,7 @@ export function Footer() {
                 {siteCopy.contact.phone}
               </a>
               <p className="mt-4 font-semibold uppercase tracking-[0.35em] text-sand/60">
-                Email
+                {footerCopy.emailLabel}
               </p>
               <a
                 href={`mailto:${siteCopy.contact.email}`}
@@ -110,7 +125,7 @@ export function Footer() {
 
           <div className="space-y-4 sm:col-span-2">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand/50">
-              Our location
+              {footerCopy.locationLabel}
             </p>
             <p className="text-sm text-sand/80">{siteCopy.address}</p>
             <Link
@@ -121,7 +136,7 @@ export function Footer() {
               }}
               className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.35em] text-sand transition hover:text-white"
             >
-              Schedule with the team
+              {footerCopy.scheduleCta}
               <ArrowUpRight size={16} />
             </Link>
           </div>
@@ -132,7 +147,9 @@ export function Footer() {
           <span>
             © {new Date().getFullYear()} Concierge at the Bay. All rights reserved.
           </span>
-          <span>Crafted in Punta de Mita</span>
+          <div className="flex flex-col gap-2 text-[0.7rem] uppercase tracking-[0.35em] text-sand/60 sm:flex-row sm:items-center sm:gap-6">
+            <span>{footerCopy.craftedNote}</span>
+          </div>
         </div>
       </div>
     </footer>
