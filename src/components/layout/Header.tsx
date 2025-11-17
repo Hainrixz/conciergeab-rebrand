@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -29,6 +30,42 @@ export function Header() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+
+    if (isMenuOpen) {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+    } else {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+    }
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
 
   const handleNavClick = (href: string) => {
     const id = href.replace("#", "");
@@ -127,71 +164,85 @@ export function Header() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.aside
-              className="ml-auto flex h-full w-[85%] max-w-sm flex-col justify-between bg-sand px-8 pb-10 pt-24 text-earth"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="flex flex-col gap-8">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.href}
-                type="button"
-                className="text-left text-2xl font-semibold"
-                onClick={() => handleNavClick(item.href)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 + 0.2 }}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm lg:hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <motion.aside
+                  className="relative ml-auto flex h-full w-[85%] max-w-sm flex-col justify-between bg-sand px-8 pb-10 pt-24 text-earth shadow-2xl"
+                  initial={{ x: "100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "100%" }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    className="absolute right-6 top-8 flex h-10 w-10 items-center justify-center rounded-full border border-earth/15 text-earth"
+                    aria-label="Close navigation menu"
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    {item.label}
-                  </motion.button>
-                ))}
-              </div>
+                    <X size={18} />
+                  </button>
+                  <div className="flex flex-col gap-8">
+                    {navItems.map((item, index) => (
+                      <motion.button
+                        key={item.href}
+                        type="button"
+                        className="text-left text-2xl font-semibold"
+                        onClick={() => handleNavClick(item.href)}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 + 0.2 }}
+                      >
+                        {item.label}
+                      </motion.button>
+                    ))}
+                  </div>
 
-              <div className="flex flex-col gap-2 text-sm">
-                <span className="uppercase tracking-[0.3em] text-earth/60">
-                  Contact
-                </span>
-                <span>{siteCopy.contact.phone}</span>
-                <span>{siteCopy.contact.email}</span>
-              </div>
-              <div className="flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.3em] text-earth/70">
-                <Globe size={16} />
-                {(["en", "es"] as const).map((code, index) => (
-                  <span key={code} className="flex items-center gap-1">
-                    {index === 1 && (
-                      <span aria-hidden="true" className="text-earth/40">
-                        /
+                  <div className="flex flex-col gap-2 text-sm">
+                    <span className="uppercase tracking-[0.3em] text-earth/60">
+                      Contact
+                    </span>
+                    <span>{siteCopy.contact.phone}</span>
+                    <span>{siteCopy.contact.email}</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.3em] text-earth/70">
+                    <Globe size={16} />
+                    {(["en", "es"] as const).map((code, index) => (
+                      <span key={code} className="flex items-center gap-1">
+                        {index === 1 && (
+                          <span aria-hidden="true" className="text-earth/40">
+                            /
+                          </span>
+                        )}
+                        <button
+                          type="button"
+                          className={cn(
+                            "px-1 py-1",
+                            locale === code ? "text-earth" : "text-earth/50",
+                          )}
+                          onClick={() => setLocale(code)}
+                        >
+                          {code.toUpperCase()}
+                        </button>
                       </span>
-                    )}
-                    <button
-                      type="button"
-                      className={cn(
-                        "px-1 py-1",
-                        locale === code ? "text-earth" : "text-earth/50",
-                      )}
-                      onClick={() => setLocale(code)}
-                    >
-                      {code.toUpperCase()}
-                    </button>
-                  </span>
-                ))}
-              </div>
-            </motion.aside>
-          </motion.div>
+                    ))}
+                  </div>
+                </motion.aside>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </header>
   );
 }
