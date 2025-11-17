@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ArrowUpRight, Globe } from "lucide-react";
@@ -93,8 +94,15 @@ export function Header() {
             handleNavClick("#hero");
           }}
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-earth text-sand font-bold text-lg">
-            C
+          <span className="relative block h-10 w-10 overflow-hidden rounded-full bg-earth">
+            <Image
+              src="/cab-logo.png"
+              alt="Concierge at the Bay circular logo"
+              fill
+              className="object-cover"
+              sizes="40px"
+              priority
+            />
           </span>
           <div className="flex flex-col leading-tight tracking-[0.35em]">
             <span>Concierge</span>
