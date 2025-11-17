@@ -4,27 +4,23 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export function PageReveal() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) {
+      setIsVisible(false);
+      return;
+    }
 
-    let hideTimer: number | undefined;
-    const frame = window.requestAnimationFrame(() => {
-      setIsVisible(true);
-      hideTimer = window.setTimeout(() => setIsVisible(false), 1400);
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-      if (hideTimer) {
-        window.clearTimeout(hideTimer);
-      }
-    };
+    const hideTimer = window.setTimeout(() => setIsVisible(false), 1400);
+    return () => window.clearTimeout(hideTimer);
   }, []);
 
   return (
