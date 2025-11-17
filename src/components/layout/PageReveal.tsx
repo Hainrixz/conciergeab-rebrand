@@ -14,10 +14,7 @@ export function PageReveal() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (prefersReducedMotion) {
-      setIsVisible(false);
-      return;
-    }
+    if (prefersReducedMotion) return;
 
     const hideTimer = window.setTimeout(() => setIsVisible(false), 1400);
     return () => window.clearTimeout(hideTimer);
