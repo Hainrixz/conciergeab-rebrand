@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Instagram, Linkedin, ArrowUpRight } from "lucide-react";
 import { useLocale } from "@/components/locale/LocaleProvider";
@@ -50,8 +51,14 @@ export function Footer() {
       <div className="lux-container relative grid gap-10 py-16 lg:grid-cols-[0.45fr_0.55fr]">
         <div className="space-y-4">
           <div className="flex items-center gap-3 text-sm uppercase tracking-[0.35em] text-sand/70">
-            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-earth text-xl font-semibold">
-              C
+            <span className="relative block h-12 w-12 overflow-hidden rounded-full bg-sand">
+              <Image
+                src="/cab-logo.png"
+                alt="Concierge at the Bay logo"
+                fill
+                className="object-cover"
+                sizes="48px"
+              />
             </span>
             Concierge at the Bay
           </div>
