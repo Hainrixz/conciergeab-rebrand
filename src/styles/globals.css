@@ -75,6 +75,14 @@ a {
   background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
 }
 
+.horizontal-scroll {
+  scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

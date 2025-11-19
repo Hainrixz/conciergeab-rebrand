@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ShieldCheck, Sparkles, MapPin } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { useLocale } from "@/components/locale/LocaleProvider";
 import { fadeUp, staggerContainer } from "@/lib/animations/variants";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -144,39 +144,6 @@ export function About() {
             ))}
           </motion.div>
 
-          <motion.div
-            variants={fadeUp}
-            className="glass-panel relative flex flex-col gap-4 rounded-[36px] px-6 py-6 text-earth"
-          >
-            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em] text-bronze">
-              <ShieldCheck size={20} />
-              {about.response.title}
-            </div>
-            <p className="text-base text-earth/80">{about.response.description}</p>
-            <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-earth/60">
-              <MapPin size={16} />
-              {about.response.note}
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="relative flex h-48 overflow-hidden rounded-[32px] bg-earth/90 shadow-[0_30px_90px_rgba(80,61,43,0.35)]"
-          >
-            <Image
-              src={galleryImages[1]}
-              alt="Luxury villa interior details"
-              fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover opacity-90"
-            />
-            <div className="relative z-10 flex flex-col justify-end bg-gradient-to-t from-earth/80 via-earth/20 to-transparent p-6 text-white">
-              <p className="text-xs uppercase tracking-[0.35em] text-white/60">
-                {about.clientsLabel}
-              </p>
-              <p className="text-base">“{about.clientsQuote}”</p>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

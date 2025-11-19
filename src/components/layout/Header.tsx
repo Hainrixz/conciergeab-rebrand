@@ -69,11 +69,15 @@ export function Header() {
   }, [isMenuOpen]);
 
   const handleNavClick = (href: string) => {
-    const id = href.replace("#", "");
-    if (pathname === "/") {
-      smoothScrollToId(id, 100);
+    if (href.startsWith("#")) {
+      const id = href.slice(1);
+      if (pathname === "/") {
+        smoothScrollToId(id, 100);
+      } else {
+        router.push(`/${href}`);
+      }
     } else {
-      router.push(`/${href}`);
+      router.push(href);
     }
     setIsMenuOpen(false);
   };

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { siteCopy } from "@/lib/data/site";
 
-const WHATSAPP_DISPLAY = "+52 33 1344 0732";
+const WHATSAPP_DISPLAY = "+52 322 142 8372";
 
 export function FloatingWhatsApp() {
   return (

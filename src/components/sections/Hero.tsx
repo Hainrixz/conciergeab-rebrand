@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Shield, ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { fadeUp, staggerContainer } from "@/lib/animations/variants";
@@ -89,35 +89,6 @@ export function Hero() {
             </button>
           </motion.div>
 
-          <motion.div
-            className="flex flex-wrap items-center gap-6 rounded-3xl border border-earth/10 bg-white/70 px-6 py-5 shadow-[0_20px_70px_rgba(80,61,43,0.12)]"
-            variants={fadeUp}
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-earth text-sand">
-              <Shield size={24} />
-            </div>
-            <div className="text-sm text-earth/70">{heroCopy.assurance}</div>
-          </motion.div>
-
-          <motion.div
-            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
-            variants={fadeUp}
-          >
-            {heroCopy.stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-3xl border border-earth/10 bg-white/70 px-5 py-5 shadow-[0_18px_60px_rgba(0,0,0,0.08)] sm:px-6 sm:py-6"
-              >
-                <div className="text-3xl font-semibold text-earth sm:text-4xl">
-                  {stat.value}
-                  <span className="text-bronze">{stat.suffix}</span>
-                </div>
-                <p className="mt-2 text-sm uppercase tracking-[0.3em] text-earth/60">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
 
         <div className="relative mt-10 md:mt-0">

@@ -2,9 +2,9 @@ export const siteCopy = {
   name: "Concierge at the Bay",
   tagline: "Punta de Mita's private estate guardians",
   contact: {
-    phone: "01-329-291-5470",
-    email: "hello@conciergeatthebay.com",
-    whatsapp: "https://wa.me/523313440732",
+    phone: "+52 322 142 8372",
+    email: "Rosina@conciergeathebay.com",
+    whatsapp: "https://wa.me/523221428372",
   },
   social: {
     instagram: "https://www.instagram.com/conciergeatthebay",
