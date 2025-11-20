@@ -1,29 +1,71 @@
 @import "tailwindcss";
 
 :root {
+  /* Refined Luxury Palette - Higher Contrast & Depth */
   --color-bronze: #ab9274;
-  --color-sand: #e4ddd7;
-  --color-earth: #503d2b;
-  --color-onyx: #0c0c0b;
-  --color-cloud: #f6f1eb;
-  --color-cream: #fbf8f4;
-  --lux-radius: 32px;
-  --lux-shadow: 0 40px 120px rgba(80, 61, 43, 0.22);
-  --lux-blur: saturate(140%) blur(16px);
-  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
-  --header-height: 86px;
+  --color-bronze-dark: #8c7558;
+  --color-bronze-light: #c5b096;
+  
+  --color-sand: #e8e2db; /* Slightly cooler/cleaner sand */
+  --color-sand-light: #f2efeb;
+  
+  --color-earth: #4a3b2a; /* Deeper earth tone */
+  --color-earth-dark: #2c241b; /* Near black for text */
+  
+  --color-onyx: #1a1a18; /* Rich warm black */
+  --color-charcoal: #2a2a28;
+  
+  --color-cloud: #f8f6f4;
+  --color-cream: #fdfbf9;
+  
+  /* System Tokens */
+  --lux-radius: 24px; /* Slightly tighter radius for modern feel */
+  --lux-radius-lg: 40px;
+  
+  /* Cinematic Shadows */
+  --lux-shadow: 0 20px 80px -10px rgba(44, 36, 27, 0.15);
+  --lux-shadow-hover: 0 30px 100px -10px rgba(44, 36, 27, 0.25);
+  --lux-shadow-inner: inset 0 2px 4px 0 rgba(255, 255, 255, 0.15);
+  
+  /* Glass & Blur */
+  --lux-blur: saturate(120%) blur(20px);
+  --lux-glass-bg: rgba(255, 255, 255, 0.7);
+  --lux-glass-border: rgba(255, 255, 255, 0.4);
+  
+  /* Animation */
+  --ease-luxury: cubic-bezier(0.2, 0.0, 0.2, 1); /* Standard ease-out-quart like */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  
+  --header-height: 90px;
 }
 
 @theme inline {
   --color-background: var(--color-sand);
-  --color-foreground: var(--color-earth);
-  --color-bronze: #ab9274;
-  --color-sand: #e4ddd7;
-  --color-earth: #503d2b;
-  --color-cloud: #f6f1eb;
-  --color-cream: #fbf8f4;
-  --color-onyx: #0c0c0b;
+  --color-foreground: var(--color-earth-dark);
+  
+  --color-bronze: var(--color-bronze);
+  --color-bronze-dark: var(--color-bronze-dark);
+  --color-bronze-light: var(--color-bronze-light);
+  
+  --color-sand: var(--color-sand);
+  --color-sand-light: var(--color-sand-light);
+  
+  --color-earth: var(--color-earth);
+  --color-earth-dark: var(--color-earth-dark);
+  
+  --color-onyx: var(--color-onyx);
+  --color-charcoal: var(--color-charcoal);
+  
+  --color-cloud: var(--color-cloud);
+  --color-cream: var(--color-cream);
+  
   --font-sans: var(--font-poppins);
+  
+  --shadow-lux: var(--lux-shadow);
+  --shadow-lux-hover: var(--lux-shadow-hover);
+  
+  --ease-luxury: var(--ease-luxury);
+  --ease-out-expo: var(--ease-out-expo);
 }
 
 *,
@@ -37,9 +79,11 @@ body {
   font-family: var(--font-poppins), "Poppins", -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   background: var(--color-sand);
-  color: var(--color-earth);
+  color: var(--color-earth-dark);
   min-height: 100vh;
-  line-height: 1.7;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -51,36 +95,60 @@ a {
   text-decoration: none;
 }
 
+/* Utility Classes */
 .lux-container {
   width: 100%;
   margin: 0 auto;
-  max-width: 1440px;
-  padding-inline: clamp(1.5rem, 4vw, 5rem);
+  max-width: 1600px; /* Wider container for cinematic feel */
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
 }
 
 .glass-panel {
   border-radius: var(--lux-radius);
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--lux-glass-bg);
   backdrop-filter: var(--lux-blur);
-  border: 1px solid rgba(171, 146, 116, 0.25);
+  -webkit-backdrop-filter: var(--lux-blur);
+  border: 1px solid var(--lux-glass-border);
   box-shadow: var(--lux-shadow);
+}
+
+.glass-panel-dark {
+  border-radius: var(--lux-radius);
+  background: rgba(26, 26, 24, 0.7);
+  backdrop-filter: var(--lux-blur);
+  -webkit-backdrop-filter: var(--lux-blur);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 80px -10px rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 .noise-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.08;
-  mix-blend-mode: soft-light;
+  opacity: 0.04; /* Reduced opacity for cleaner look */
+  mix-blend-mode: overlay;
   background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+  z-index: 50;
+}
+
+.text-balance {
+  text-wrap: balance;
 }
 
 .horizontal-scroll {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .horizontal-scroll::-webkit-scrollbar {
   display: none;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-bronze);
+  color: white;
 }
 
 @media (prefers-reduced-motion: reduce) {

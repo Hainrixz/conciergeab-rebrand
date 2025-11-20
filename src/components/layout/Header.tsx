@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, ArrowUpRight, Globe } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { siteCopy } from "@/lib/data/site";
 import { smoothScrollToId } from "@/lib/utils/scroll";
 import { cn } from "@/lib/utils/cn";
@@ -23,7 +22,7 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 12);
+      setIsScrolled(window.scrollY > 20);
     };
 
     handleScroll();
@@ -32,40 +31,16 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when menu is open
   useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-    const originalPaddingRight = document.body.style.paddingRight;
-
     if (isMenuOpen) {
-      const scrollbarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
-      if (scrollbarWidth > 0) {
-        document.body.style.paddingRight = `${scrollbarWidth}px`;
-      }
     } else {
-      document.body.style.overflow = originalOverflow;
-      document.body.style.paddingRight = originalPaddingRight;
+      document.body.style.overflow = "";
     }
-
     return () => {
-      document.body.style.overflow = originalOverflow;
-      document.body.style.paddingRight = originalPaddingRight;
+      document.body.style.overflow = "";
     };
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsMenuOpen(false);
-      }
-    };
-
-    if (isMenuOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMenuOpen]);
 
   const handleNavClick = (href: string) => {
@@ -83,178 +58,180 @@ export function Header() {
   };
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-500",
-        isScrolled ? "bg-sand/95 shadow-xl shadow-earth/5 backdrop-blur-xl" : "",
-      )}
-    >
-      <div className="lux-container flex h-[var(--header-height)] items-center justify-between">
-        <Link
-          href="#hero"
-          className="flex items-center gap-3 font-semibold tracking-[0.3em] text-xs uppercase text-earth"
-          onClick={(event) => {
-            event.preventDefault();
-            handleNavClick("#hero");
-          }}
-        >
-          <span className="relative block h-10 w-10 overflow-hidden rounded-full bg-earth">
-            <Image
-              src="/cab-logo.png"
-              alt="Concierge at the Bay circular logo"
-              fill
-              className="object-cover"
-              sizes="40px"
-              priority
-            />
-          </span>
-          <div className="flex flex-col leading-tight tracking-[0.35em]">
-            <span>Concierge</span>
-            <span className="text-[0.62rem] font-light tracking-[0.74em]">
-              at the Bay
-            </span>
-          </div>
-        </Link>
-
-        <nav className="hidden items-center gap-10 text-sm font-medium text-earth/70 lg:flex">
-          {navItems.map((item) => (
-            <button
-              key={item.href}
-              type="button"
-              className="transition-all duration-300 hover:text-earth"
-              onClick={() => handleNavClick(item.href)}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <div className="hidden items-center gap-2 rounded-full border border-earth/15 px-2 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-earth/80 lg:flex">
-            <Globe size={16} className="text-earth/60" />
-            <div className="flex overflow-hidden rounded-full border border-earth/10">
-              {(["en", "es"] as const).map((code) => (
-                <button
-                  key={code}
-                  type="button"
-                  onClick={() => setLocale(code)}
-                  className={cn(
-                    "px-3 py-1 transition-colors",
-                    locale === code
-                      ? "bg-earth text-sand"
-                      : "text-earth/60 hover:text-earth",
-                  )}
-                >
-                  {code.toUpperCase()}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="hidden lg:block">
-            <MagneticButton
-              href="#contact"
-              variant="primary"
-              icon={<ArrowUpRight size={18} />}
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-40 transition-all duration-500 ease-luxury",
+          isScrolled ? "py-4" : "py-6"
+        )}
+      >
+        <div className="lux-container">
+          <div
+            className={cn(
+              "relative flex items-center justify-between rounded-full transition-all duration-500 ease-luxury",
+              isScrolled
+                ? "glass-panel px-6 py-3"
+                : "bg-transparent px-0 py-0"
+            )}
+          >
+            <Link
+              href="#hero"
+              className="flex items-center gap-3"
               onClick={(event) => {
                 event.preventDefault();
-                handleNavClick("#contact");
+                handleNavClick("#hero");
               }}
             >
-              Schedule consultation
-            </MagneticButton>
-          </div>
+              <span className="relative block h-10 w-10 overflow-hidden rounded-full bg-earth-dark">
+                <Image
+                  src="/cab-logo.png"
+                  alt="Concierge at the Bay"
+                  fill
+                  className="object-cover"
+                  sizes="40px"
+                  priority
+                />
+              </span>
+              <div className={cn("flex flex-col leading-tight transition-colors duration-300", isScrolled ? "text-earth-dark" : "text-white")}>
+                <span className="text-xs font-bold uppercase tracking-[0.2em]">Concierge</span>
+                <span className="text-[0.6rem] font-light uppercase tracking-[0.4em] opacity-80">
+                  at the Bay
+                </span>
+              </div>
+            </Link>
 
-          <button
-            type="button"
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-earth/15 text-earth lg:hidden"
-            aria-label="Toggle navigation menu"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
-
-      {typeof document !== "undefined" &&
-        createPortal(
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div
-                className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm lg:hidden"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <motion.aside
-                  className="relative ml-auto flex h-full w-[85%] max-w-sm flex-col justify-between bg-sand px-8 pb-10 pt-24 text-earth shadow-2xl"
-                  initial={{ x: "100%" }}
-                  animate={{ x: 0 }}
-                  exit={{ x: "100%" }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  onClick={(event) => event.stopPropagation()}
+            {/* Desktop Nav */}
+            <nav className="hidden items-center gap-8 lg:flex">
+              {navItems.map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => handleNavClick(item.href)}
+                  className={cn(
+                    "text-xs font-medium uppercase tracking-[0.2em] transition-colors hover:text-bronze",
+                    isScrolled ? "text-earth-dark/80" : "text-white/90"
+                  )}
                 >
-                  <button
-                    type="button"
-                    className="absolute right-6 top-8 flex h-10 w-10 items-center justify-center rounded-full border border-earth/15 text-earth"
-                    aria-label="Close navigation menu"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <X size={18} />
-                  </button>
-                  <div className="flex flex-col gap-8">
-                    {navItems.map((item, index) => (
-                      <motion.button
-                        key={item.href}
-                        type="button"
-                        className="text-left text-2xl font-semibold"
-                        onClick={() => handleNavClick(item.href)}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 + 0.2 }}
-                      >
-                        {item.label}
-                      </motion.button>
-                    ))}
-                  </div>
+                  {item.label}
+                </button>
+              ))}
+            </nav>
 
-                  <div className="flex flex-col gap-2 text-sm">
-                    <span className="uppercase tracking-[0.3em] text-earth/60">
-                      Contact
-                    </span>
-                    <span>{siteCopy.contact.phone}</span>
-                    <span>{siteCopy.contact.email}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.3em] text-earth/70">
-                    <Globe size={16} />
-                    {(["en", "es"] as const).map((code, index) => (
-                      <span key={code} className="flex items-center gap-1">
-                        {index === 1 && (
-                          <span aria-hidden="true" className="text-earth/40">
-                            /
-                          </span>
-                        )}
-                        <button
-                          type="button"
-                          className={cn(
-                            "px-1 py-1",
-                            locale === code ? "text-earth" : "text-earth/50",
-                          )}
-                          onClick={() => setLocale(code)}
-                        >
-                          {code.toUpperCase()}
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                </motion.aside>
-              </motion.div>
-            )}
-          </AnimatePresence>,
-          document.body,
+            <div className="flex items-center gap-4">
+              {/* Language Switcher */}
+              <div className={cn(
+                "hidden items-center gap-2 rounded-full border px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-widest transition-colors lg:flex",
+                isScrolled ? "border-earth/10 text-earth-dark" : "border-white/20 text-white"
+              )}>
+                <Globe size={14} className="opacity-70" />
+                <div className="flex gap-2">
+                  {(["en", "es"] as const).map((code) => (
+                    <button
+                      key={code}
+                      onClick={() => setLocale(code)}
+                      className={cn(
+                        "transition-opacity hover:opacity-100",
+                        locale === code ? "opacity-100" : "opacity-50"
+                      )}
+                    >
+                      {code}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="hidden lg:block">
+                <MagneticButton
+                  href="#contact"
+                  variant={isScrolled ? "primary" : "ghost"}
+                  className={cn(
+                    "h-10 px-5 text-xs",
+                    !isScrolled && "bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  )}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("#contact");
+                  }}
+                >
+                  Book Now
+                </MagneticButton>
+              </div>
+
+              {/* Mobile Menu Toggle */}
+              <button
+                className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full border transition-colors lg:hidden",
+                  isScrolled
+                    ? "border-earth/10 text-earth-dark hover:bg-earth/5"
+                    : "border-white/20 text-white hover:bg-white/10"
+                )}
+                onClick={() => setIsMenuOpen(true)}
+                aria-label="Open menu"
+              >
+                <Menu size={20} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed right-0 top-0 z-50 h-full w-[85%] max-w-sm bg-sand p-8 shadow-2xl lg:hidden"
+            >
+              <div className="flex items-center justify-between mb-12">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-earth-dark">Menu</span>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-earth/10 text-earth-dark hover:bg-earth/5"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <nav className="flex flex-col gap-6">
+                {navItems.map((item, i) => (
+                  <motion.button
+                    key={item.href}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    onClick={() => handleNavClick(item.href)}
+                    className="text-left text-2xl font-light text-earth-dark"
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+              </nav>
+
+              <div className="absolute bottom-8 left-8 right-8">
+                <div className="mb-8 h-px w-full bg-earth/10" />
+                <div className="flex flex-col gap-4 text-sm text-earth/60">
+                  <a href={`tel:${siteCopy.contact.phone}`} className="hover:text-earth-dark transition-colors">
+                    {siteCopy.contact.phone}
+                  </a>
+                  <a href={`mailto:${siteCopy.contact.email}`} className="hover:text-earth-dark transition-colors">
+                    {siteCopy.contact.email}
+                  </a>
+                </div>
+              </div>
+            </motion.aside>
+          </>
         )}
-    </header>
+      </AnimatePresence>
+    </>
   );
 }

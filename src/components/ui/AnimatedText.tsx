@@ -10,10 +10,11 @@ type AllowedIntrinsicElement = keyof HTMLElementTagNameMap;
 type AnimatedTextProps = {
   text: string;
   as?:
-    | AllowedIntrinsicElement
-    | ComponentType<{ className?: string; children?: ReactNode }>;
+  | AllowedIntrinsicElement
+  | ComponentType<{ className?: string; children?: ReactNode }>;
   className?: string;
   delay?: number;
+  align?: "left" | "center" | "right";
 };
 
 export function AnimatedText({
@@ -21,8 +22,15 @@ export function AnimatedText({
   as: Component = "h1",
   className,
   delay = 0,
+  align = "left",
 }: AnimatedTextProps) {
   const words = text.split(" ");
+
+  const justifyClass = {
+    left: "justify-start",
+    center: "justify-center",
+    right: "justify-end",
+  }[align];
 
   return (
     <Component
@@ -32,7 +40,7 @@ export function AnimatedText({
       <motion.span
         key={text}
         aria-hidden="true"
-        className="flex flex-wrap gap-x-3 gap-y-2"
+        className={cn("flex flex-wrap gap-x-3 gap-y-2", justifyClass)}
         initial="hidden"
         animate="visible"
       >

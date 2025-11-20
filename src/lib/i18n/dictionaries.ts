@@ -583,7 +583,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     ],
     hero: {
       badge: { location: "Punta Mita", since: "Desde 2007" },
-      headline: "Administración excepcional de propiedades en el paraíso",
+      headline: "Administración Excepcional de Propiedades.",
       description:
         "Creamos experiencias sin preocupaciones para las residencias más celebradas de Punta de Mita, combinando cuidado meticuloso con un servicio de concierge intuitivo para usted y sus invitados.",
       primaryCta: "Solicitar concierge",
