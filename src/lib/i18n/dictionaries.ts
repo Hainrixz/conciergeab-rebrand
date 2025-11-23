@@ -61,9 +61,9 @@ type ServicesPageContent = {
     title: string;
     description: string;
     essentialsTitle: string;
-    essentials: string[];
+    essentials: { name: string; url: string }[];
     alsoTitle: string;
-    alsoList: string[];
+    alsoList: { name: string; url: string }[];
   };
 };
 
@@ -271,7 +271,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
             id: "available-services",
             title: "Available services",
             description:
-              "Daily comforts that keep your stay effortless—from thoughtful breakfasts to child care and memory-making photography.",
+              "Daily comforts that keep your stay effortless",
             items: [
               {
                 id: "airport-transportation",
@@ -342,7 +342,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
             id: "area-activities",
             title: "Activities in the area",
             description:
-              "Sail, surf, climb, and discover Riviera Nayarit with curated outings. We arrange private guides, permits, and door-to-door transport so each adventure feels bespoke.",
+              "Discover Riviera Nayarit, We arrange everything.",
             items: [
               {
                 id: "sailing-charters",
@@ -476,32 +476,32 @@ export const dictionaries: Record<Locale, Dictionary> = {
         dining: {
           title: "Top nearby restaurants",
           description:
-            "Need a night out? These favorites stay on speed dial for last-minute reservations, chef's tables, and sunset cocktails.",
+            "Need a night out? These restaurants are a call away.",
           essentialsTitle: "Chef-loved essentials",
           essentials: [
-            "Mina",
-            "La Pescadora",
-            "Si Sushi",
-            "El Cafesito",
-            "Fish Market at La Pescadora",
-            "Lobster Paradise",
-            "Punta Mercedes",
-            "Zicatela",
-            "Tuna Blanca",
-            "La Rustica",
-            "Casa Teresa",
-            "Parrot Fish",
-            "Tora",
+            { name: "Mina", url: "https://www.google.com/maps/search/?api=1&query=Mina+Punta+Mita" },
+            { name: "La Pescadora", url: "https://www.google.com/maps/search/?api=1&query=La+Pescadora+Punta+Mita" },
+            { name: "Si Sushi", url: "https://www.google.com/maps/search/?api=1&query=Si+Sushi+Punta+Mita" },
+            { name: "El Cafesito", url: "https://www.google.com/maps/search/?api=1&query=El+Cafecito+de+Mita" },
+            { name: "Fish Market at La Pescadora", url: "https://www.google.com/maps/search/?api=1&query=La+Pescadora+Punta+Mita" },
+            { name: "Lobster Paradise", url: "https://www.google.com/maps/search/?api=1&query=Lobster+Paradise+Punta+Mita" },
+            { name: "Punta Mercedes", url: "https://www.google.com/maps/search/?api=1&query=Punta+Mercedes+Punta+Mita" },
+            { name: "Zicatela", url: "https://www.google.com/maps/search/?api=1&query=Zicatela+Punta+Mita" },
+            { name: "Tuna Blanca", url: "https://www.google.com/maps/search/?api=1&query=Tuna+Blanca+Punta+Mita" },
+            { name: "La Rustica", url: "https://www.google.com/maps/search/?api=1&query=La+Rustica+Mita" },
+            { name: "Casa Teresa", url: "https://www.google.com/maps/search/?api=1&query=Casa+Teresa+Punta+Mita" },
+            { name: "Parrot Fish", url: "https://www.google.com/maps/search/?api=1&query=Parrot+Fish+Punta+Mita" },
+            { name: "Tora", url: "https://www.google.com/maps/search/?api=1&query=Tora+Punta+Mita" },
           ],
           alsoTitle: "Also recommended",
           alsoList: [
-            "Mauka",
-            "Makai",
-            "Hector's Kitchen",
-            "Casa Tradicional",
-            "Naef",
-            "Barracuda",
-            "Margaritas on the hill",
+            { name: "Mauka", url: "https://www.google.com/maps/search/?api=1&query=Mauka+Punta+Mita" },
+            { name: "Makai", url: "https://www.google.com/maps/search/?api=1&query=Makai+Restaurant+Punta+Mita" },
+            { name: "Hector's Kitchen", url: "https://www.google.com/maps/search/?api=1&query=Hector's+Kitchen+Punta+Mita" },
+            { name: "Casa Tradicional", url: "https://www.google.com/maps/search/?api=1&query=Casa+Tradicional+Punta+Mita" },
+            { name: "Naef", url: "https://www.google.com/maps/search/?api=1&query=Naef+Punta+Mita" },
+            { name: "Barracuda", url: "https://www.google.com/maps/search/?api=1&query=El+Barracuda+Punta+de+Mita" },
+            { name: "Margaritas on the hill", url: "https://www.google.com/maps/search/?api=1&query=Margaritas+on+the+hill+Punta+Mita" },
           ],
         },
       },
@@ -716,7 +716,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
             id: "available-services",
             title: "Servicios disponibles",
             description:
-              "Comodidades diarias que hacen la estancia sin esfuerzo: desayunos pensados, cuidado infantil y fotografías que capturan recuerdos.",
+              "Comodidades diarias que hacen la estancia sin esfuerzo",
             items: [
               {
                 id: "airport-transportation",
@@ -787,7 +787,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
             id: "area-activities",
             title: "Actividades en la zona",
             description:
-              "Navega, surfea, escala y descubre la Riviera Nayarit con experiencias curadas. Organizamos guías, permisos y traslados puerta a puerta para que cada aventura sea única.",
+              "Descubre Riviera Nayarit, Nosotros organizamos todo.",
             items: [
               {
                 id: "sailing-charters",
@@ -921,32 +921,32 @@ export const dictionaries: Record<Locale, Dictionary> = {
         dining: {
           title: "Restaurantes cercanos",
           description:
-            "¿Se antoja salir? Estas mesas favoritas siempre están en marcación rápida para reservar al último minuto, pedir chef's table o ver el atardecer con cocteles.",
+            "¿Se antoja salir? Estos restaurantes están a una llamada de distancia.",
           essentialsTitle: "Imprescindibles del chef",
           essentials: [
-            "Mina",
-            "La Pescadora",
-            "Si Sushi",
-            "El Cafesito",
-            "Fish Market at La Pescadora",
-            "Lobster Paradise",
-            "Punta Mercedes",
-            "Zicatela",
-            "Tuna Blanca",
-            "La Rustica",
-            "Casa Teresa",
-            "Parrot Fish",
-            "Tora",
+            { name: "Mina", url: "https://www.google.com/maps/search/?api=1&query=Mina+Punta+Mita" },
+            { name: "La Pescadora", url: "https://www.google.com/maps/search/?api=1&query=La+Pescadora+Punta+Mita" },
+            { name: "Si Sushi", url: "https://www.google.com/maps/search/?api=1&query=Si+Sushi+Punta+Mita" },
+            { name: "El Cafesito", url: "https://www.google.com/maps/search/?api=1&query=El+Cafecito+de+Mita" },
+            { name: "Fish Market at La Pescadora", url: "https://www.google.com/maps/search/?api=1&query=La+Pescadora+Punta+Mita" },
+            { name: "Lobster Paradise", url: "https://www.google.com/maps/search/?api=1&query=Lobster+Paradise+Punta+Mita" },
+            { name: "Punta Mercedes", url: "https://www.google.com/maps/search/?api=1&query=Punta+Mercedes+Punta+Mita" },
+            { name: "Zicatela", url: "https://www.google.com/maps/search/?api=1&query=Zicatela+Punta+Mita" },
+            { name: "Tuna Blanca", url: "https://www.google.com/maps/search/?api=1&query=Tuna+Blanca+Punta+Mita" },
+            { name: "La Rustica", url: "https://www.google.com/maps/search/?api=1&query=La+Rustica+Mita" },
+            { name: "Casa Teresa", url: "https://www.google.com/maps/search/?api=1&query=Casa+Teresa+Punta+Mita" },
+            { name: "Parrot Fish", url: "https://www.google.com/maps/search/?api=1&query=Parrot+Fish+Punta+Mita" },
+            { name: "Tora", url: "https://www.google.com/maps/search/?api=1&query=Tora+Punta+Mita" },
           ],
           alsoTitle: "También recomendamos",
           alsoList: [
-            "Mauka",
-            "Makai",
-            "Hector's Kitchen",
-            "Casa Tradicional",
-            "Naef",
-            "Barracuda",
-            "Margaritas on the hill",
+            { name: "Mauka", url: "https://www.google.com/maps/search/?api=1&query=Mauka+Punta+Mita" },
+            { name: "Makai", url: "https://www.google.com/maps/search/?api=1&query=Makai+Restaurant+Punta+Mita" },
+            { name: "Hector's Kitchen", url: "https://www.google.com/maps/search/?api=1&query=Hector's+Kitchen+Punta+Mita" },
+            { name: "Casa Tradicional", url: "https://www.google.com/maps/search/?api=1&query=Casa+Tradicional+Punta+Mita" },
+            { name: "Naef", url: "https://www.google.com/maps/search/?api=1&query=Naef+Punta+Mita" },
+            { name: "Barracuda", url: "https://www.google.com/maps/search/?api=1&query=El+Barracuda+Punta+de+Mita" },
+            { name: "Margaritas on the hill", url: "https://www.google.com/maps/search/?api=1&query=Margaritas+on+the+hill+Punta+Mita" },
           ],
         },
       },

@@ -61,7 +61,7 @@ export function Services() {
 
           <div className="space-y-6">
             <AnimatedText
-              text="Concierge services coordinated for every stay"
+              text={servicesCopy.heading}
               className="text-4xl font-light leading-[1.1] tracking-tight text-earth-dark sm:text-5xl lg:text-6xl"
               align="center"
             />
@@ -80,7 +80,7 @@ export function Services() {
           >
             <MagneticButton
               variant="primary"
-              className="min-w-[160px] justify-center bg-earth-dark text-sand hover:bg-earth-dark/90"
+              className="min-w-[160px] justify-center bg-earth-dark !text-white hover:bg-earth-dark/90"
               onClick={(event) => {
                 event.preventDefault();
                 smoothScrollToId("contact", 120);

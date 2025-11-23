@@ -123,7 +123,7 @@ export function Portfolio() {
         >
           {copy.highlights.map((highlight, index) => (
             <motion.article
-              key={highlight.title}
+              key={index}
               variants={fadeUp}
               className="group relative aspect-[3/4] overflow-hidden rounded-[24px] shadow-lg transition-all duration-500 hover:shadow-2xl lg:aspect-[4/5]"
             >

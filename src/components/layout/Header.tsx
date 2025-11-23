@@ -141,18 +141,16 @@ export function Header() {
 
               <div className="hidden lg:block">
                 <MagneticButton
-                  href="#contact"
+                  href={siteCopy.contact.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variant={isScrolled ? "primary" : "ghost"}
                   className={cn(
                     "h-10 px-5 text-xs",
                     !isScrolled && "bg-white/10 border-white/20 text-white hover:bg-white/20"
                   )}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("#contact");
-                  }}
                 >
-                  Book Now
+                  Contact Us
                 </MagneticButton>
               </div>
 
@@ -218,6 +216,25 @@ export function Header() {
               </nav>
 
               <div className="absolute bottom-8 left-8 right-8">
+                <div className="mb-6 flex items-center gap-4">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-earth/40">
+                    Language
+                  </span>
+                  <div className="flex gap-4">
+                    {(["en", "es"] as const).map((code) => (
+                      <button
+                        key={code}
+                        onClick={() => setLocale(code)}
+                        className={cn(
+                          "text-sm font-bold uppercase tracking-widest transition-colors",
+                          locale === code ? "text-earth-dark" : "text-earth/40 hover:text-earth-dark"
+                        )}
+                      >
+                        {code}
+                      </button>
+                    ))}
+                  </div>
+                </div>
                 <div className="mb-8 h-px w-full bg-earth/10" />
                 <div className="flex flex-col gap-4 text-sm text-earth/60">
                   <a href={`tel:${siteCopy.contact.phone}`} className="hover:text-earth-dark transition-colors">

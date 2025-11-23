@@ -16,21 +16,22 @@ export function ServicesPageContent() {
   return (
     <div className="bg-sand text-earth-dark">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] overflow-hidden pt-40 pb-20 flex items-center">
+      {/* Hero Section */}
+      <section className="relative min-h-[100vh] w-full overflow-hidden bg-earth-dark text-white">
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1572331165267-854da2b00ca1?auto=format&fit=crop&w=2400&q=80"
-            alt="Luxury Services"
+            src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=2400&q=80"
+            alt="Luxury Services in Punta Mita"
             fill
-            className="object-cover opacity-20"
+            className="object-cover opacity-70"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-sand via-sand/80 to-sand" />
-          <div className="noise-overlay opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          <div className="noise-overlay opacity-20" />
         </div>
 
-        <div className="lux-container relative z-10">
+        <div className="lux-container relative z-10 flex h-full flex-col justify-end pb-24 pt-30 md:pb-32">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -38,7 +39,7 @@ export function ServicesPageContent() {
             className="max-w-4xl space-y-8"
           >
             <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-earth/10 bg-white/40 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-bronze backdrop-blur-sm">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
                 <Sparkles size={14} />
                 {servicesPage.heroEyebrow}
               </span>
@@ -47,13 +48,13 @@ export function ServicesPageContent() {
             <div className="overflow-hidden">
               <AnimatedText
                 text={servicesPage.heroHeading}
-                className="text-balance text-5xl font-light leading-[1.1] tracking-tight text-earth-dark sm:text-6xl lg:text-7xl"
+                className="text-balance text-5xl font-light leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
               />
             </div>
 
             <motion.p
               variants={fadeUp}
-              className="max-w-2xl text-lg font-light leading-relaxed text-earth/80 sm:text-xl"
+              className="max-w-2xl text-lg font-light leading-relaxed text-white/80 sm:text-xl"
             >
               {servicesPage.heroDescription}
             </motion.p>
@@ -65,7 +66,7 @@ export function ServicesPageContent() {
               <MagneticButton
                 href="#contact"
                 variant="primary"
-                className="bg-earth-dark text-sand hover:bg-earth-dark/90"
+                className="bg-white !text-earth-dark hover:bg-bronze hover:!text-white border-none"
                 icon={<ArrowUpRight size={20} />}
                 onClick={(event) => {
                   event.preventDefault();
@@ -75,7 +76,7 @@ export function ServicesPageContent() {
                 {servicesPage.heroCta}
               </MagneticButton>
 
-              <p className="text-xs uppercase tracking-[0.2em] text-earth/50 max-w-xs">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/60 max-w-xs">
                 {servicesPage.heroNote}
               </p>
             </motion.div>
@@ -84,7 +85,7 @@ export function ServicesPageContent() {
       </section>
 
       {/* Service Categories */}
-      <div className="space-y-24 pb-32">
+      <div className="space-y-24 pt-24 pb-32 sm:pt-32">
         {servicesPage.categories.map((category) => (
           <section key={category.id} className="relative">
             <div className="lux-container">
@@ -97,7 +98,7 @@ export function ServicesPageContent() {
                 </p>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {category.items.map((item, index) => (
                   <motion.article
                     key={item.id}
@@ -105,28 +106,28 @@ export function ServicesPageContent() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ delay: index * 0.1 }}
-                    className="group relative flex flex-col justify-between gap-6 overflow-hidden rounded-[32px] border border-white/40 bg-white/40 p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:bg-white/60 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)]"
+                    className="group relative flex flex-col justify-between gap-4 overflow-hidden rounded-[24px] border border-white/40 bg-white/40 p-4 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:bg-white/60 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] sm:p-6"
                   >
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-earth/30">
+                        <span className="text-[0.65rem] font-bold text-earth/30 sm:text-xs">
                           {`${index + 1}`.padStart(2, "0")}
                         </span>
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-earth/10 bg-transparent text-earth/30 transition-all group-hover:border-earth/30 group-hover:text-earth">
-                          <ArrowUpRight size={16} />
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full border border-earth/10 bg-transparent text-earth/30 transition-all group-hover:border-earth/30 group-hover:text-earth sm:h-8 sm:w-8">
+                          <ArrowUpRight size={14} className="sm:w-4 sm:h-4" />
                         </span>
                       </div>
 
                       <div>
-                        <h3 className="mb-2 text-xl font-medium text-earth-dark">
+                        <h3 className="mb-1 text-base font-medium text-earth-dark sm:mb-2 sm:text-lg">
                           {item.name}
                         </h3>
-                        <p className="text-xs font-bold uppercase tracking-[0.15em] text-bronze/80">
+                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-bronze/80 sm:text-xs">
                           {item.summary}
                         </p>
                       </div>
 
-                      <p className="text-sm leading-relaxed text-earth/70">
+                      <p className="text-xs leading-relaxed text-earth/70 sm:text-sm">
                         {item.details}
                       </p>
                     </div>
@@ -167,9 +168,16 @@ export function ServicesPageContent() {
                 </h3>
                 <ul className="space-y-4">
                   {servicesPage.dining.essentials.map((spot) => (
-                    <li key={spot} className="flex items-center gap-3 text-lg font-light text-white/90">
+                    <li key={spot.name} className="flex items-center gap-3 text-lg font-light text-white/90">
                       <span className="h-1.5 w-1.5 rounded-full bg-bronze" />
-                      {spot}
+                      <a
+                        href={spot.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors hover:text-bronze hover:underline"
+                      >
+                        {spot.name}
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -181,9 +189,16 @@ export function ServicesPageContent() {
                 </h3>
                 <ul className="space-y-4">
                   {servicesPage.dining.alsoList.map((spot) => (
-                    <li key={spot} className="flex items-center gap-3 text-lg font-light text-white/60">
+                    <li key={spot.name} className="flex items-center gap-3 text-lg font-light text-white/60">
                       <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                      {spot}
+                      <a
+                        href={spot.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors hover:text-white hover:underline"
+                      >
+                        {spot.name}
+                      </a>
                     </li>
                   ))}
                 </ul>
